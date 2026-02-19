@@ -48,3 +48,43 @@ export const Videos = ({ sources = [], title = "ABC" }) => {
     )
 }
 
+
+
+// export const Todo = ({ text = "Default text" }) => {
+//     return <div>{text}</div>
+// }
+
+// export const Todo2 = (props) => {
+//     return <div>{props.text}</div>
+// }
+
+// Todo2.defaultProps = {
+//     text: "Default text"
+// }
+
+
+// const obj = {
+//     name: "John",
+//     age: 30,
+//     city: "New York",
+//     skills: [
+//         {
+//             name: "JavaScript",
+//             level: "Advanced"
+//         },
+//         {
+//             name: "React",
+//             level: "Intermediate"
+//         }
+//     ]
+// }
+
+// const firstSkillName = obj.skills[0].name // "JavaScript"
+// const {
+//     name, // obj.name
+//     age, // obj.age
+//     city, // obj.city
+//     skills: [ { name: firstSkillName2 } ] // obj.skills[0].name
+// } = obj;
+
+// firstSkillName2 // "JavaScript"
