@@ -1,22 +1,44 @@
 import './App.css'
 import { Header } from './components/Header/Header'
+// import FooterComponent from './components/Footer/Footer'
+import { default as FooterComponent } from './components/Footer/Footer'
+import { Books } from './components/Books/Books';
+
+export type Book = {
+  id: number;
+  name: string;
+  author: string;
+  publicationDate: string;
+}
 
 function App() {
-  const items = ['item1', 'item2', 'item3']
+  const items: Book[] = [
+    {
+      id: 1,
+      name: "Książka 1",
+      author: "Autor 1",
+      publicationDate: "2020-01-01",
+    },
+    {
+      id: 2,
+      name: "Książka 2",
+      author: "Autor 2",
+      publicationDate: "2021-01-01",
+    },
+    {
+      id: 3,
+      name: "Książka 3",
+      author: "Autor 3",
+      publicationDate: "2022-01-01",
+    },
+  ];
   const appTitle = "Witaj w naszej księgarni"
 
   return (
     <div>
       <Header appTitle={appTitle} />
-      
-      <ul>
-        {items.map((item) => (
-          <li key={item}>{item}</li>
-        ))}
-      </ul>
-      <footer>
-        <p>Copyright © 2024 | Created by: Mateusz</p>
-      </footer>
+      <Books items={items} />
+      <FooterComponent />
     </div>
   )
 }
