@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useFetchData } from "../../hooks/useFetchData";
 
 type Reader = {
     id: number;
@@ -8,32 +9,31 @@ type Reader = {
 }
 
 export const Readers = () => {
-    const [readers, setReaders] = useState<Reader[]>([]);
-    const [isLoading, setIsLoading] = useState(false);
+    const { data: readers, isLoading } = useFetchData<Reader[]>('https://jsonplaceholder.typicode.com/users');
+    // const [readers, setReaders] = useState<Reader[]>([]);
+    // const [isLoading, setIsLoading] = useState(false);
     const [isReadersListExpanded, setIsReadersListExpanded] = useState(true);
 
-    const fetchReaders = async () => {
-        setIsLoading(true);
-        try {
-            const response = await fetch("https://jsonplaceholder.typicode.com/users");
-            if (!response.ok) {
-                throw new Error("Nie można pobrać danych");
-            }
-            const data: Reader[] = await response.json();
-            setReaders(data);
-        } catch (error) {
-            console.error("Błąd podczas pobierania danych:", error);
-        }
-        finally {
-            setIsLoading(false);
-        }
-    }
+    // const fetchReaders = async () => {
+    //     setIsLoading(true);
+    //     try {
+    //         const response = await fetch("https://jsonplaceholder.typicode.com/users");
+    //         if (!response.ok) {
+    //             throw new Error("Nie można pobrać danych");
+    //         }
+    //         const data: Reader[] = await response.json();
+    //         setReaders(data);
+    //     } catch (error) {
+    //         console.error("Błąd podczas pobierania danych:", error);
+    //     }
+    //     finally {
+    //         setIsLoading(false);
+    //     }
+    // }
 
-    useEffect(() => {
-        fetchReaders();
-    }, []);
-
-    console.log("Readers:", readers);
+    // useEffect(() => {
+    //     fetchReaders();
+    // }, []);
 
     if (isLoading) {
         return <p>Ładowanie czytelników...</p>;
@@ -48,7 +48,7 @@ export const Readers = () => {
     return (
         <>
             <ul>
-                {readers.map((reader) => (
+                {readers && readers.map((reader) => (
                     <li key={reader.id}>{reader.name}</li>
                 ))}
             </ul>
