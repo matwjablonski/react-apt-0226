@@ -5,7 +5,7 @@ import { default as FooterComponent } from './components/Footer/Footer'
 import { Books } from './components/Books/Books';
 import { LoginForm } from './components/LoginForm/LoginForm';
 import { LoginFormRef } from './components/LoginFormRef/LoginFormRef';
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 
 export type Book = {
   id: number;
@@ -35,7 +35,9 @@ function App() {
       {!isUserLoggedIn && <LoginForm loginAction={handleLogin} />}
       <h3>Form 2</h3>
       <LoginFormRef />
-      <Books />
+      <Suspense fallback={<p>Ładowanie...</p>}>
+        <Books />
+      </Suspense>
       <FooterComponent isUserLoggedIn={isUserLoggedIn} />
     </div>
   )

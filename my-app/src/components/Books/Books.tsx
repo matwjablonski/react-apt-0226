@@ -1,16 +1,17 @@
 import { use, useEffect, useState } from "react";
 import type { Book as BookType } from "../../App";
 import { Book } from "../Book/Book";
-import { useFetchData } from "../../hooks/useFetchData";
+// import { useFetchData } from "../../hooks/useFetchData";
 import { fetchData } from "../../asyncActions/fetchBooks";
 
+const fetchBooksPromise = fetchData<BookType>();
 
 export const Books = () => {
     const [notEnoughBooks, setNotEnoughBooks] = useState(false);
     // const { booksToRender: items, isLoading } = useFetchData<BookType>();
-    const [booksToRender, setBooksToRender] = useState<BookType[]>([]);
-    const items = use(fetchData<BookType>());
-    
+    const items = use(fetchBooksPromise);
+    const [booksToRender, setBooksToRender] = useState<BookType[]>(items || []);
+
     // useEffect(() => {
     //     if (items) {
     //         setBooksToRender(items);
@@ -44,26 +45,21 @@ export const Books = () => {
         // const updatedBooks = booksToRender.filter((book) => book.id !== id);
         // setBooksToRender(updatedBooks);
 
-        // setBooksToRender((prevBooks) => {
-        //     const updatedBooks = prevBooks.filter((book) => book.id !== id);
-        //     setNotEnoughBooks(updatedBooks.length < 3);
-        //     return updatedBooks;
-        // });
+        setBooksToRender((prevBooks) => {
+            const updatedBooks = prevBooks.filter((book) => book.id !== id);
+            return updatedBooks;
+        });
     }
 
     useEffect(() => {
         document.title = `Masz ${booksToRender.length} książek!`;
     }, [booksToRender.length]);
 
-    if (!booksToRender.length) {
-        return <p>Trwa ładowanie książek...</p>;
-    }
-
     return (
         <div>
             {notEnoughBooks ? <p>Za mało książek. Zbieraj dalej!</p> : <p>Masz masę książek! Przystopuj!</p>}
             <ul ref={handleListRefAction}>
-                {items && items.map((item) => (
+                {booksToRender.map((item) => (
                     <li key={item.id}>
                         <Book book={item} removeBookAction={handleRemoveBook} />
                     </li>
