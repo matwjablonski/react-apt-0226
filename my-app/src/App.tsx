@@ -6,6 +6,7 @@ import { Books } from './components/Books/Books';
 import { LoginForm } from './components/LoginForm/LoginForm';
 import { LoginFormRef } from './components/LoginFormRef/LoginFormRef';
 import { Suspense, useState } from 'react';
+import { Readers } from './components/Readers/Readers';
 
 export type Book = {
   id: number;
@@ -35,6 +36,7 @@ function App() {
       {!isUserLoggedIn && <LoginForm loginAction={handleLogin} />}
       <h3>Form 2</h3>
       <LoginFormRef />
+      <Readers />
       <Suspense fallback={<p>Ładowanie...</p>}>
         <Books />
       </Suspense>
