@@ -1,13 +1,16 @@
-import { useState, type ChangeEvent, type SyntheticEvent } from "react";
+import { type ChangeEvent, type InputHTMLAttributes } from "react";
 
-export const Input = () => {
-    const [inputValue, setInputValue] = useState('');
+type InputProps = {
+    label: string;
+    handleChange(e: ChangeEvent<HTMLInputElement>): void;
+    // tutaj możemy dodać dodatkowe propsy, które chcemy obsłużyć w komponencie
+} & InputHTMLAttributes<HTMLInputElement>;
 
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setInputValue(e.target.value);
-    }
-
+export const Input = ({ label, value, handleChange, ...inputRest }: InputProps) => {    
     return (
-        <input type="text" placeholder="Type something..." value={inputValue} onChange={handleChange} />
+        <div>
+            <label htmlFor={inputRest.id}>{label}</label>
+            <input type="text" {...inputRest} value={value} onChange={handleChange} />
+        </div>
     )
 }
