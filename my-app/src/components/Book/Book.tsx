@@ -3,13 +3,15 @@ import { type Book as BookType } from '../../App';
 
 // przykład z użyciem całego obiektu jako propsa
 type BookProps = {
-    book: Omit<BookType, 'id'>;
+    // book: Omit<BookType, 'id'>;
+    book: BookType;
+    removeBookAction?(id: number): void;
 };
 
 // przykład z użyciem destrukturyzacji
 // type BookProps = Omit<BookType, 'id'>;
 
-export const Book = ({ book: { name, author, publicationDate } }: BookProps) => {
+export const Book = ({ book: { name, author, publicationDate, id }, removeBookAction }: BookProps) => {
     const [isBookRead, setIsBookRead] = useState(false);
     const [votes, setVotes] = useState(() => {
         return Math.floor(author.length * 2 / 5);
@@ -29,6 +31,7 @@ export const Book = ({ book: { name, author, publicationDate } }: BookProps) => 
                 {isBookRead ? 'Oznacz jako nieprzeczytaną' : 'Oznacz jako przeczytaną'}
             </button>
             <button onClick={handleVote}>Oddaj swój głos</button>
+            <button onClick={() => removeBookAction && removeBookAction(id)}>Usuń z listy</button>
         </div>
     )
 }
