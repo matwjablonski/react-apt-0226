@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { type Book as BookType } from '../../App';
+import { Link } from 'react-router';
 
 // przykład z użyciem całego obiektu jako propsa
 type BookProps = {
@@ -32,6 +33,7 @@ export const Book = ({ book: { name, author, publicationDate, id }, removeBookAc
             </button>
             <button onClick={handleVote}>Oddaj swój głos</button>
             <button onClick={() => removeBookAction && removeBookAction(id)}>Usuń z listy</button>
+            <Link to={`/books/${id}`}>Zobacz szczegóły</Link>
         </div>
     )
 }

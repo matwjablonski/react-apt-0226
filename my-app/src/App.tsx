@@ -2,12 +2,15 @@ import './App.css'
 import { Header } from './components/Header/Header'
 // import FooterComponent from './components/Footer/Footer'
 import { default as FooterComponent } from './components/Footer/Footer'
-import { Books } from './components/Books/Books';
 import { LoginForm } from './components/LoginForm/LoginForm';
 import { LoginFormRef } from './components/LoginFormRef/LoginFormRef';
 import { Suspense, useState } from 'react';
-import { Readers } from './components/Readers/Readers';
 import { Route, Routes } from 'react-router';
+import { ContactPage } from './pages/Contact';
+import { ReadersPage } from './pages/Readers';
+import { BooksPage } from './pages/Books';
+import { Home } from './pages/Home';
+import { BookPage } from './pages/Book';
 
 export type Book = {
   id: number;
@@ -39,24 +42,35 @@ function App() {
       <LoginFormRef />
       
       <Routes>
+        <Route path='/' element={<Home />} />
         <Route
           path='/books'
           element={
             <Suspense fallback={<p>Ładowanie...</p>}>
-              <Books />
+              <BooksPage />
             </Suspense>
           }
         />
+        <Route path="/books/:id" element={<BookPage />} />
         <Route
           path='/readers'
           element={
             <Suspense fallback={<p>Ładowanie...</p>}>
-              <Readers />
+              <ReadersPage />
+              
+            </Suspense>
+          }
+        />
+        <Route
+          path='/contact'
+          element={
+            <Suspense fallback={<p>Ładowanie...</p>}>
+              <ContactPage isUserLoggedIn={isUserLoggedIn} />
             </Suspense>
           }
         />
       </Routes>
-      <FooterComponent isUserLoggedIn={isUserLoggedIn} />
+      <FooterComponent />
     </div>
   )
 }
