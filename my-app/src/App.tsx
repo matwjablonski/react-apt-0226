@@ -7,6 +7,7 @@ import { LoginForm } from './components/LoginForm/LoginForm';
 import { LoginFormRef } from './components/LoginFormRef/LoginFormRef';
 import { Suspense, useState } from 'react';
 import { Readers } from './components/Readers/Readers';
+import { Route, Routes } from 'react-router';
 
 export type Book = {
   id: number;
@@ -36,10 +37,25 @@ function App() {
       {!isUserLoggedIn && <LoginForm loginAction={handleLogin} />}
       <h3>Form 2</h3>
       <LoginFormRef />
-      <Readers />
-      <Suspense fallback={<p>Ładowanie...</p>}>
-        <Books />
-      </Suspense>
+      
+      <Routes>
+        <Route
+          path='/books'
+          element={
+            <Suspense fallback={<p>Ładowanie...</p>}>
+              <Books />
+            </Suspense>
+          }
+        />
+        <Route
+          path='/readers'
+          element={
+            <Suspense fallback={<p>Ładowanie...</p>}>
+              <Readers />
+            </Suspense>
+          }
+        />
+      </Routes>
       <FooterComponent isUserLoggedIn={isUserLoggedIn} />
     </div>
   )
