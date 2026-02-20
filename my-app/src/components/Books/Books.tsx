@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Book as BookType } from "../../App";
 import { Book } from "../Book/Book";
 
@@ -29,6 +29,10 @@ export const Books = ({ items }: BooksProps) => {
             setNotEnoughBooks(height < 500);
         }
     }
+
+    useEffect(() => {
+        document.title = `Masz ${items.length} książek!`;
+    }, [ items.length ]);
 
     return (
         <div>

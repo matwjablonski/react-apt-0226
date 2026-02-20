@@ -16,13 +16,19 @@ export const Book = ({ book: { name, author, publicationDate } }: BookProps) => 
     })
     const bookStatus = isBookRead ? 'Przeczytana' : 'Nieprzeczytana';
 
+    const handleVote = () => {
+        setVotes((prevVotes) => prevVotes + 1);
+    }
+
     return (
         <div>
+            <p>Oddano głosów: {votes}</p>
             <h2>{name} <small>{bookStatus}</small></h2>
             <p>{author} ({publicationDate})</p>
             <button onClick={() => setIsBookRead((prev) => !prev)}>
                 {isBookRead ? 'Oznacz jako nieprzeczytaną' : 'Oznacz jako przeczytaną'}
             </button>
+            <button onClick={handleVote}>Oddaj swój głos</button>
         </div>
     )
 }

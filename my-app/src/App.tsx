@@ -37,7 +37,7 @@ function App() {
     {
       id: 4,
       name: "Książka 4",
-      author: "Autor 4",
+      author: "Autor Autorski 4",
       publicationDate: "2023-01-01",
     }
   ];
