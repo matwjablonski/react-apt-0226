@@ -34,6 +34,12 @@ function App() {
       author: "Autor 3",
       publicationDate: "2022-01-01",
     },
+    {
+      id: 4,
+      name: "Książka 4",
+      author: "Autor 4",
+      publicationDate: "2023-01-01",
+    }
   ];
   const appTitle = "Witaj w naszej księgarni"
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
