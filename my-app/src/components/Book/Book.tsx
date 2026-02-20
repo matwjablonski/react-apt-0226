@@ -11,6 +11,9 @@ type BookProps = {
 
 export const Book = ({ book: { name, author, publicationDate } }: BookProps) => {
     const [isBookRead, setIsBookRead] = useState(false);
+    const [votes, setVotes] = useState(() => {
+        return Math.floor(author.length * 2 / 5);
+    })
     const bookStatus = isBookRead ? 'Przeczytana' : 'Nieprzeczytana';
 
     return (
