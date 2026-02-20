@@ -48,7 +48,10 @@ function App() {
 
   return (
     <div>
-      <Header appTitle={appTitle} isUserLoggedIn={isUserLoggedIn} logoutAction={handleLogout} />
+      <Header appTitle={appTitle}>
+        {isUserLoggedIn && <p>Witaj, Mateusz!</p>}
+        {isUserLoggedIn && <button onClick={handleLogout}>Wyloguj</button>}
+      </Header>
       {!isUserLoggedIn && <LoginForm loginAction={handleLogin} />}
       <h3>Form 2</h3>
       <LoginFormRef />

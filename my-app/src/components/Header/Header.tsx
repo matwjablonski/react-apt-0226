@@ -1,14 +1,13 @@
+import type { PropsWithChildren } from "react";
+
 type HeaderProps = {
     appTitle?: string;
-    isUserLoggedIn?: boolean;
-    logoutAction?: () => void;
-}
+};
 
-export const Header = ({ appTitle = "Witaj!", isUserLoggedIn = false, logoutAction }: HeaderProps) => {
+export const Header = ({ appTitle = "Witaj!", children }: PropsWithChildren<HeaderProps>) => {
     return (
         <header>
-            {isUserLoggedIn && <p>Witaj, Mateusz!</p>}
-            {isUserLoggedIn && <button onClick={logoutAction}>Wyloguj</button>}
+            {children}
             <h1>{appTitle}</h1>
         </header>
     )
