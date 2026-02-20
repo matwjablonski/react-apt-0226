@@ -3,6 +3,7 @@ import { Header } from './components/Header/Header'
 // import FooterComponent from './components/Footer/Footer'
 import { default as FooterComponent } from './components/Footer/Footer'
 import { Books } from './components/Books/Books';
+import { Input } from './components/Input/Input';
 
 export type Book = {
   id: number;
@@ -37,6 +38,7 @@ function App() {
   return (
     <div>
       <Header appTitle={appTitle} />
+      <Input />
       <Books items={items} />
       <FooterComponent />
     </div>
