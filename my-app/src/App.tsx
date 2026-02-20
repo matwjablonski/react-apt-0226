@@ -15,32 +15,6 @@ export type Book = {
 }
 
 function App() {
-  const items: Book[] = [
-    {
-      id: 1,
-      name: "Książka 1",
-      author: "Autor 1",
-      publicationDate: "2020-01-01",
-    },
-    {
-      id: 2,
-      name: "Książka 2",
-      author: "Autor 2",
-      publicationDate: "2021-01-01",
-    },
-    {
-      id: 3,
-      name: "Książka 3",
-      author: "Autor 3",
-      publicationDate: "2022-01-01",
-    },
-    {
-      id: 4,
-      name: "Książka 4",
-      author: "Autor Autorski 4",
-      publicationDate: "2023-01-01",
-    }
-  ];
   const appTitle = "Witaj w naszej księgarni"
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
 
@@ -61,7 +35,7 @@ function App() {
       {!isUserLoggedIn && <LoginForm loginAction={handleLogin} />}
       <h3>Form 2</h3>
       <LoginFormRef />
-      <Books items={items} />
+      <Books />
       <FooterComponent isUserLoggedIn={isUserLoggedIn} />
     </div>
   )
