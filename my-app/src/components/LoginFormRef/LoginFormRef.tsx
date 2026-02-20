@@ -1,4 +1,5 @@
 import { useRef } from "react"
+import { Form } from "../Form/Form";
 
 export const LoginFormRef = () => {
     const usernameRef = useRef<HTMLInputElement>(null);
@@ -15,10 +16,10 @@ export const LoginFormRef = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
             <input type="text" placeholder="Username" ref={usernameRef} />
             <input type="password" placeholder="Password" ref={passwordRef} />
             <button type="submit">Zaloguj</button>
-        </form>
+        </Form>
     )
 }

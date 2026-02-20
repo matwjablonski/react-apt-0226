@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Input } from "../Input/Input"
+import { Form } from "../Form/Form";
 
 export const LoginForm = () => {
     // const [username, setUsername] = useState("");
@@ -23,7 +24,7 @@ export const LoginForm = () => {
     }
 
     return (
-        <form>
+        <Form onSubmit={() => {}}>
             <Input 
                 label="Nazwa użytkownika"
                 placeholder="Username"
@@ -41,6 +42,6 @@ export const LoginForm = () => {
                 handleChange={handleFormChange}
             />
             <button type="submit">Zaloguj</button>
-        </form>
+        </Form>
     )
 }
