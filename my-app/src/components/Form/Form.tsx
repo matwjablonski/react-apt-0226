@@ -4,8 +4,10 @@ type FormProps = {
 
 export const Form = ({ children, onSubmit }: FormProps) => {
     return (
-        <form onSubmit={onSubmit}>
-            {children}
-        </form>
+        <div className="">
+            <form onSubmit={onSubmit} noValidate>
+                {children}
+            </form>
+        </div>
     );
 }

@@ -17,10 +17,10 @@ export const LoginForm = () => {
 
     const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        setFormState({
-            ...formState,
+        setFormState((prevFormState) => ({
+            ...prevFormState,
             [name]: value,
-        });
+        }));
     }
 
     return (
