@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Form } from "../Form/Form";
 import { Input } from "../Input/Input"
 
-export const ContactForm = () => {
+export const ContactForm = ({ isUserLoggedIn }: { isUserLoggedIn: boolean}) => {
     const [formState, setFormState] = useState({
         name: "",
         message: "",
@@ -24,7 +24,7 @@ export const ContactForm = () => {
     }
 
     return (
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} isUserLoggedIn={isUserLoggedIn} >
             <Input
                 label="Imię"
                 placeholder="Podaj swoje imię"

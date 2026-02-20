@@ -5,6 +5,7 @@ import { default as FooterComponent } from './components/Footer/Footer'
 import { Books } from './components/Books/Books';
 import { LoginForm } from './components/LoginForm/LoginForm';
 import { LoginFormRef } from './components/LoginFormRef/LoginFormRef';
+import { useState } from 'react';
 
 export type Book = {
   id: number;
@@ -35,15 +36,24 @@ function App() {
     },
   ];
   const appTitle = "Witaj w naszej księgarni"
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+
+  const handleLogin = (canLogin: boolean) => {
+    setIsUserLoggedIn(canLogin);
+  }
+
+  const handleLogout = () => {
+    setIsUserLoggedIn(false);
+  }
 
   return (
     <div>
-      <Header appTitle={appTitle} />
-      <LoginForm />
+      <Header appTitle={appTitle} isUserLoggedIn={isUserLoggedIn} logoutAction={handleLogout} />
+      {!isUserLoggedIn && <LoginForm loginAction={handleLogin} />}
       <h3>Form 2</h3>
       <LoginFormRef />
       <Books items={items} />
-      <FooterComponent />
+      <FooterComponent isUserLoggedIn={isUserLoggedIn} />
     </div>
   )
 }

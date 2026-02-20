@@ -2,7 +2,11 @@ import { useState } from "react";
 import { Input } from "../Input/Input"
 import { Form } from "../Form/Form";
 
-export const LoginForm = () => {
+type LoginFormProps = {
+    loginAction(canLogin: boolean): void;
+}
+
+export const LoginForm = ({ loginAction }: LoginFormProps) => {
     // const [username, setUsername] = useState("");
     // const [password, setPassword] = useState("");
 
@@ -23,8 +27,15 @@ export const LoginForm = () => {
         }));
     }
 
+    const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        console.log("Form submitted with data:", formState);
+        const canUserLogin = formState.username === "admin" && formState.password === "password";
+        loginAction(canUserLogin);
+    }
+
     return (
-        <Form onSubmit={() => {}}>
+        <Form onSubmit={handleSubmit}>
             <Input 
                 label="Nazwa użytkownika"
                 placeholder="Username"

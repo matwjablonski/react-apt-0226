@@ -1,8 +1,8 @@
 import { ContactForm } from "../ContactForm/ContactForm";
 
-const Footer = () => (
+const Footer = ({ isUserLoggedIn }: { isUserLoggedIn: boolean } ) => (
     <footer>
-        <ContactForm />
+        <ContactForm isUserLoggedIn={isUserLoggedIn} />
         <p>Copyright © 2024 | Created by: Mateusz</p>
     </footer>
 );
