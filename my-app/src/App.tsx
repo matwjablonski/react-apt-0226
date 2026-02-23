@@ -13,6 +13,7 @@ import { Home } from './pages/Home';
 import { BookPage } from './pages/Book';
 import { MyAvatar } from './components/Avatar/Avatar';
 import { ProtectedRoute } from './components/ProtectedRoute/ProtectedRoute';
+import { Modal } from './components/Modal/Modal';
 
 export type Book = {
   id: number;
@@ -24,9 +25,15 @@ export type Book = {
 function App() {
   const appTitle = "Witaj w naszej księgarni"
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const handleOpenLoginModal = () => {
+    setIsModalVisible(prev => !prev);
+  }
 
   const handleLogin = (canLogin: boolean) => {
     setIsUserLoggedIn(canLogin);
+    setIsModalVisible(false);
   }
 
   const handleLogout = () => {
@@ -42,7 +49,10 @@ function App() {
         </div>}
         {isUserLoggedIn && <button onClick={handleLogout}>Wyloguj</button>}
       </Header>
-      {!isUserLoggedIn && <LoginForm loginAction={handleLogin} />}
+      <button onClick={handleOpenLoginModal}>Otwórz modal logowania</button>
+      <Modal isVisible={isModalVisible}>
+        {!isUserLoggedIn && <LoginForm loginAction={handleLogin} />}
+      </Modal>
       <h3>Form 2</h3>
       <LoginFormRef />
       
