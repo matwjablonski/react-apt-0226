@@ -12,6 +12,7 @@ import { BooksPage } from './pages/Books';
 import { Home } from './pages/Home';
 import { BookPage } from './pages/Book';
 import { MyAvatar } from './components/Avatar/Avatar';
+import { ProtectedRoute } from './components/ProtectedRoute/ProtectedRoute';
 
 export type Book = {
   id: number;
@@ -50,9 +51,11 @@ function App() {
         <Route
           path='/books'
           element={
-            <Suspense fallback={<p>Ładowanie...</p>}>
-              <BooksPage />
-            </Suspense>
+            <ProtectedRoute isUserAuthenticated={isUserLoggedIn}>
+              <Suspense fallback={<p>Ładowanie...</p>}>
+                <BooksPage />
+              </Suspense>
+            </ProtectedRoute>
           }
         />
         <Route path="/books/:id" element={<BookPage />} />
