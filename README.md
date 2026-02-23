@@ -8,5 +8,5 @@ Mój email: mail@mateuszjablonski.com
 ## Dodatkowe materiały
 
 - [Aganda](./materials/agenda.md)
-- [Bibliografia](./materials/bibliography.md)
+- [Materiały dodatkowe](./materials/additional.md)
 - [Prezentacja](./materials/presentation.pdf)
