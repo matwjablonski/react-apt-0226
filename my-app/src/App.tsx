@@ -67,40 +67,37 @@ function App() {
           </Modal>
           <h3>Form 2</h3>
           <LoginFormRef />
-          <Suspense fallback={<p>Ładowanie...</p>}>
-            <Routes>
-              <Route path='/' element={<HomePage />} />
-              <Route
-                path='/books'
-                element={
-                  <ProtectedRoute>
-
-                    <Suspense fallback={<p>Ładowanie...</p>}>
-                      <BooksPage />
-                    </Suspense>
-                  </ProtectedRoute>
-                }
-              />
-              <Route path="/books/:id" element={<BookPage />} />
-              <Route
-                path='/readers'
-                element={
+          <Routes>
+            <Route path='/' element={<HomePage />} />
+            <Route
+              path='/books'
+              element={
+                <ProtectedRoute>
                   <Suspense fallback={<p>Ładowanie...</p>}>
-                    <ReadersPage />
-                    
+                    <BooksPage />
                   </Suspense>
-                }
-              />
-              <Route
-                path='/contact'
-                element={
-                  <Suspense fallback={<p>Ładowanie...</p>}>
-                    <ContactPage />
-                  </Suspense>
-                }
-              />
-            </Routes>
-          </Suspense>
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/books/:id" element={<BookPage />} />
+            <Route
+              path='/readers'
+              element={
+                <Suspense fallback={<p>Ładowanie...</p>}>
+                  <ReadersPage />
+                  
+                </Suspense>
+              }
+            />
+            <Route
+              path='/contact'
+              element={
+                <Suspense fallback={<p>Ładowanie...</p>}>
+                  <ContactPage />
+                </Suspense>
+              }
+            />
+          </Routes>
           <FooterComponent />
         </div>
       </UserProvider>
