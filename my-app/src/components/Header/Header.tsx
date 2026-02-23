@@ -1,16 +1,16 @@
 import type { PropsWithChildren } from "react";
-import { Nav } from "../Nav/Nav";
 
 type HeaderProps = {
     appTitle?: string;
+    nav: React.ReactNode;
 };
 
-export const Header = ({ appTitle = "Witaj!", children }: PropsWithChildren<HeaderProps>) => {
+export const Header = ({ appTitle = "Witaj!", children, nav }: PropsWithChildren<HeaderProps>) => {
     return (
         <header>
             {children}
             <h1>{appTitle}</h1>
-            <Nav />
+            {nav}
         </header>
     )
 }

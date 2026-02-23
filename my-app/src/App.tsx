@@ -4,18 +4,21 @@ import { Header } from './components/Header/Header'
 import { default as FooterComponent } from './components/Footer/Footer'
 import { LoginForm } from './components/LoginForm/LoginForm';
 import { LoginFormRef } from './components/LoginFormRef/LoginFormRef';
-import { Suspense, useState } from 'react';
+import { lazy, Suspense, useState } from 'react';
 import { Route, Routes } from 'react-router';
 import { ContactPage } from './pages/Contact';
 import { ReadersPage } from './pages/Readers';
-import { BooksPage } from './pages/Books';
-import { Home } from './pages/Home';
+
 import { BookPage } from './pages/Book';
 import { MyAvatar } from './components/Avatar/Avatar';
 import { ProtectedRoute } from './components/ProtectedRoute/ProtectedRoute';
 import { Modal } from './components/Modal/Modal';
 import { UserProvider, type User } from './context/UserContext';
 import { ThemeProvider, type Theme } from './context/ThemeContext';
+import { Nav } from './components/Nav/Nav';
+
+const HomePage = lazy(() => import('./pages/Home').then(module => ({ default: module.Home })));
+const BooksPage = lazy(() => import('./pages/Books').then(module => ({ default: module.BooksPage })));
 
 export type Book = {
   id: number;
@@ -51,7 +54,7 @@ function App() {
     }}>
       <UserProvider value={user}>
         <div className="mt-4">
-          <Header appTitle={appTitle}>
+          <Header appTitle={appTitle} nav={<Nav />}>
             {user?.isLoggedIn && <div>
               <MyAvatar alt="Twój awatar" src="https://placehold.co/150" />
               <p>Witaj, {user.name}!</p>  
@@ -64,39 +67,40 @@ function App() {
           </Modal>
           <h3>Form 2</h3>
           <LoginFormRef />
-          
-          <Routes>
-            <Route path='/' element={<Home />} />
-            <Route
-              path='/books'
-              element={
-                <ProtectedRoute>
+          <Suspense fallback={<p>Ładowanie...</p>}>
+            <Routes>
+              <Route path='/' element={<HomePage />} />
+              <Route
+                path='/books'
+                element={
+                  <ProtectedRoute>
 
+                    <Suspense fallback={<p>Ładowanie...</p>}>
+                      <BooksPage />
+                    </Suspense>
+                  </ProtectedRoute>
+                }
+              />
+              <Route path="/books/:id" element={<BookPage />} />
+              <Route
+                path='/readers'
+                element={
                   <Suspense fallback={<p>Ładowanie...</p>}>
-                    <BooksPage />
+                    <ReadersPage />
+                    
                   </Suspense>
-                </ProtectedRoute>
-              }
-            />
-            <Route path="/books/:id" element={<BookPage />} />
-            <Route
-              path='/readers'
-              element={
-                <Suspense fallback={<p>Ładowanie...</p>}>
-                  <ReadersPage />
-                  
-                </Suspense>
-              }
-            />
-            <Route
-              path='/contact'
-              element={
-                <Suspense fallback={<p>Ładowanie...</p>}>
-                  <ContactPage />
-                </Suspense>
-              }
-            />
-          </Routes>
+                }
+              />
+              <Route
+                path='/contact'
+                element={
+                  <Suspense fallback={<p>Ładowanie...</p>}>
+                    <ContactPage />
+                  </Suspense>
+                }
+              />
+            </Routes>
+          </Suspense>
           <FooterComponent />
         </div>
       </UserProvider>
