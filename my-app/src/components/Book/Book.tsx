@@ -2,6 +2,8 @@ import { useMemo, useState } from 'react';
 import { type Book as BookType } from '../../App';
 import { Link } from 'react-router';
 import styles from './Book.module.scss';
+import { useStore } from '../../store';
+import type { StoreState } from '../../store';
 
 // przykład z użyciem całego obiektu jako propsa
 type BookProps = {
@@ -14,11 +16,12 @@ type BookProps = {
 // type BookProps = Omit<BookType, 'id'>;
 
 export const Book = ({ book: { name, author, publicationDate, id }, removeBookAction }: BookProps) => {
-    const [isBookRead, setIsBookRead] = useState(false);
     const [votes, setVotes] = useState(() => {
         return Math.floor(author.length * 2 / 5);
     })
+    const isBookRead = useStore((state: StoreState) => state.readBooks.includes(id));
     const bookStatus = isBookRead ? 'Przeczytana' : 'Nieprzeczytana';
+    const { setBookAsRead } = useStore();
 
     const handleVote = () => {
         setVotes((prevVotes) => prevVotes + 1);
@@ -34,7 +37,10 @@ export const Book = ({ book: { name, author, publicationDate, id }, removeBookAc
             <p>Oddano głosów: {votes}</p>
             <h2 style={nameStyles}>{name} <small>{bookStatus}</small></h2>
             <p>{author} ({publicationDate})</p>
-            <button onClick={() => setIsBookRead((prev) => !prev)}>
+            <button onClick={() => {
+                // setIsBookRead((prev) => !prev);
+                setBookAsRead(id);
+            }}>
                 {isBookRead ? 'Oznacz jako nieprzeczytaną' : 'Oznacz jako przeczytaną'}
             </button>
             <button onClick={handleVote}>Oddaj swój głos</button>
