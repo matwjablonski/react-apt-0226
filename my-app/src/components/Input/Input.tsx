@@ -8,9 +8,9 @@ type InputProps = {
 
 export const Input = ({ label, value, handleChange, ...inputRest }: InputProps) => {    
     return (
-        <div>
+        <div className="pb-4 flex gap-2">
             <label htmlFor={inputRest.id}>{label}</label>
-            <input type="text" {...inputRest} value={value} onChange={handleChange} />
+            <input type="text" {...inputRest} value={value} onChange={handleChange} className="p-3 border-2 rounded-2xl" />
         </div>
     )
 }

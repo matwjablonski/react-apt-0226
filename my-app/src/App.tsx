@@ -11,6 +11,7 @@ import { ReadersPage } from './pages/Readers';
 import { BooksPage } from './pages/Books';
 import { Home } from './pages/Home';
 import { BookPage } from './pages/Book';
+import { MyAvatar } from './components/Avatar/Avatar';
 
 export type Book = {
   id: number;
@@ -34,7 +35,10 @@ function App() {
   return (
     <div className="mt-4">
       <Header appTitle={appTitle}>
-        {isUserLoggedIn && <p>Witaj, Mateusz!</p>}
+        {isUserLoggedIn && <div>
+          <MyAvatar alt="Twój awatar" src="https:/ /placehold.co/150" />
+          <p>Witaj, Mateusz!</p>  
+        </div>}
         {isUserLoggedIn && <button onClick={handleLogout}>Wyloguj</button>}
       </Header>
       {!isUserLoggedIn && <LoginForm loginAction={handleLogin} />}

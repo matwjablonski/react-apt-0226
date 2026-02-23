@@ -3,6 +3,7 @@ import type { Book as BookType } from "../../App";
 import { Book } from "../Book/Book";
 // import { useFetchData } from "../../hooks/useFetchData";
 import { fetchData } from "../../asyncActions/fetchBooks";
+import styles from './Books.module.css';
 
 const fetchBooksPromise = fetchData<BookType>();
 
@@ -58,7 +59,7 @@ export const Books = () => {
     return (
         <div>
             {notEnoughBooks ? <p>Za mało książek. Zbieraj dalej!</p> : <p>Masz masę książek! Przystopuj!</p>}
-            <ul ref={handleListRefAction}>
+            <ul ref={handleListRefAction} className={styles.books}>
                 {booksToRender.map((item) => (
                     <li key={item.id}>
                         <Book book={item} removeBookAction={handleRemoveBook} />

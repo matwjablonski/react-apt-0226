@@ -9,7 +9,7 @@ type Reader = {
 }
 
 export const Readers = () => {
-    const { data: readers, isLoading } = useFetchData<Reader[]>('https://jsonplaceholder.typicode.com/users');
+    const { data: readers, isLoading } = useFetchData<Reader[]>('users');
     // const [readers, setReaders] = useState<Reader[]>([]);
     // const [isLoading, setIsLoading] = useState(false);
     const [isReadersListExpanded, setIsReadersListExpanded] = useState(true);
