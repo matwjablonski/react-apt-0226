@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useFetchData } from "../../hooks/useFetchData";
+// import { useFetchData } from "../../hooks/useFetchData";
+import { useReaders } from "../../hooks/queries/useReaders";
 
 type Reader = {
     id: number;
@@ -9,9 +10,10 @@ type Reader = {
 }
 
 export const Readers = () => {
-    const { data: readers, isLoading } = useFetchData<Reader[]>('users');
+    // const { data: readers, isLoading } = useFetchData<Reader[]>('users');
     // const [readers, setReaders] = useState<Reader[]>([]);
     // const [isLoading, setIsLoading] = useState(false);
+    const { data: readers, isLoading } = useReaders<Reader[]>();
     const [isReadersListExpanded, setIsReadersListExpanded] = useState(true);
 
     // const fetchReaders = async () => {

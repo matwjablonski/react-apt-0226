@@ -47,6 +47,8 @@ function App() {
     setUser(null);
   }
 
+  console.log('App renderuje się ponownie');
+
   return (
     <ThemeProvider value={{
       theme,

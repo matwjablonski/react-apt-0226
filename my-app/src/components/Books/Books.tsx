@@ -1,4 +1,4 @@
-import { use, useEffect, useState } from "react";
+import { use, useCallback, useEffect, useState } from "react";
 import type { Book as BookType } from "../../App";
 import { Book } from "../Book/Book";
 // import { useFetchData } from "../../hooks/useFetchData";
@@ -34,12 +34,12 @@ export const Books = () => {
     //     }
     // }, []);
 
-    const handleListRefAction = (element: HTMLUListElement | null) => {
+    const handleListRefAction = useCallback((element: HTMLUListElement | null) => {
         if (element) {
             const { height } = element.getBoundingClientRect();
             setNotEnoughBooks(height < 500);
         }
-    }
+    }, []);
 
     const handleRemoveBook = (id: number) => {
         console.log("Usuwamy książkę o id:", id);
