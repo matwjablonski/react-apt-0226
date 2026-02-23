@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { type Book as BookType } from '../../App';
 import { Link } from 'react-router';
 import styles from './Book.module.scss';
@@ -24,10 +24,15 @@ export const Book = ({ book: { name, author, publicationDate, id }, removeBookAc
         setVotes((prevVotes) => prevVotes + 1);
     }
 
+    const nameStyles = useMemo(() => ({
+        color: isBookRead ? 'green' : 'black',
+        textDecoration: isBookRead ? 'line-through' : 'none',
+    }), [isBookRead]);
+
     return (
         <div className={styles.book}>
             <p>Oddano głosów: {votes}</p>
-            <h2>{name} <small>{bookStatus}</small></h2>
+            <h2 style={nameStyles}>{name} <small>{bookStatus}</small></h2>
             <p>{author} ({publicationDate})</p>
             <button onClick={() => setIsBookRead((prev) => !prev)}>
                 {isBookRead ? 'Oznacz jako nieprzeczytaną' : 'Oznacz jako przeczytaną'}
