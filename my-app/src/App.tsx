@@ -32,7 +32,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div className="mt-4">
       <Header appTitle={appTitle}>
         {isUserLoggedIn && <p>Witaj, Mateusz!</p>}
         {isUserLoggedIn && <button onClick={handleLogout}>Wyloguj</button>}
