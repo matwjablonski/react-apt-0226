@@ -1,7 +1,7 @@
 import { ContactForm } from "../components/ContactForm/ContactForm"
 
-export const ContactPage = ({ isUserLoggedIn }: { isUserLoggedIn: boolean }) => {
+export const ContactPage = () => {
     return (
-        <ContactForm isUserLoggedIn={isUserLoggedIn} />
+        <ContactForm />
     )
 }

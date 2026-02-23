@@ -1,12 +1,11 @@
-import type { PropsWithChildren } from "react";
+import { useContext, type PropsWithChildren } from "react";
 import { Navigate } from "react-router";
+import { UserContext } from "../../context/UserContext";
 
-type ProtectedRouteProps = {
-    isUserAuthenticated: boolean;
-}
+export const ProtectedRoute = ({ children }: PropsWithChildren) => {
+    const user = useContext(UserContext);
 
-export const ProtectedRoute = ({ isUserAuthenticated, children }: PropsWithChildren<ProtectedRouteProps>) => {
-    if (!isUserAuthenticated) {
+    if (!user?.isLoggedIn) {
         return <Navigate to="/" replace />;
     }
 

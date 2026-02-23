@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Form } from "../Form/Form";
 import { Input } from "../Input/Input"
+import { UserContext } from "../../context/UserContext";
 
-export const ContactForm = ({ isUserLoggedIn }: { isUserLoggedIn: boolean}) => {
+export const ContactForm = () => {
+    const user = useContext(UserContext);
+
     const [formState, setFormState] = useState({
         name: "",
         message: "",
         phoneNumber: "",
-    })
+    });
 
     const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -24,7 +27,7 @@ export const ContactForm = ({ isUserLoggedIn }: { isUserLoggedIn: boolean}) => {
     }
 
     return (
-        <Form onSubmit={handleSubmit} isUserLoggedIn={isUserLoggedIn} >
+        <Form onSubmit={handleSubmit} isUserLoggedIn={user?.isLoggedIn} >
             <Input
                 label="Imię"
                 placeholder="Podaj swoje imię"
