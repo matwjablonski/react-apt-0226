@@ -13,7 +13,7 @@ export const Readers = () => {
     // const { data: readers, isLoading } = useFetchData<Reader[]>('users');
     // const [readers, setReaders] = useState<Reader[]>([]);
     // const [isLoading, setIsLoading] = useState(false);
-    const { data: readers, isLoading } = useReaders<Reader[]>();
+    const { data: readers, isLoading } = useReaders<Reader>();
     const [isReadersListExpanded, setIsReadersListExpanded] = useState(true);
 
     // const fetchReaders = async () => {
